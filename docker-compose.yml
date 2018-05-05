@@ -37,10 +37,6 @@ services:
     extends:
       file: common.yml
       service: sphinx
-  #links:
-  #  - database:db
-  #depends_on:
-  #  - database
 
 volumes:
     var_lib_mysql: {}

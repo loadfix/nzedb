@@ -16,6 +16,7 @@ help:
 	@echo "  pull - pull the latest version"
 	@echo "  restore - restore last database backup. nzedb must be running"
 	@echo "  shell - shell into the nzedb container"
+	@echo "  sphinx - populate sphinxsearch tables"
 	@echo "  start - start nzedb (restarts if it is already running)"
 	@echo "  status - shows running containers"
 	@echo "  stop - stops nzedb"
@@ -52,6 +53,9 @@ restore:
 
 shell:
 	@bin/nzedb_shell
+
+sphinx:
+	@bin/populate_sphinxsearch
 
 start:
 	@bin/start_nzedb

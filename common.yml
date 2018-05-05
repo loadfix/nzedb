@@ -5,9 +5,10 @@ services:
     image: slydetector/simply-nzedb-mariadb
     restart: unless-stopped
     tmpfs:
-      - /mnt/ramdisk:size=1G
+      - /tmp:size=1G
     volumes:
       - var_lib_mysql:/var/lib/mysql:rw
+      # - $PWD/data/var_lib_mysql:/var/lib/mysql:rw
       - $PWD/data/etc_mysql_conf.d:/etc/mysql/conf.d
       - $PWD/data/mysql_user:/mysql_user
     environment:
@@ -58,12 +59,16 @@ services:
     restart: unless-stopped
 
   sphinx:
-    image: centurylink/sphinx
+    image: loadfix/sphinx
     restart: unless-stopped
-    ports:
-      - 9306:9306
+    volumes:
+      - sphinx_data:/var/lib/sphinx/data
+    expose:
+      - "9316"
+      - "9306"
 
 volumes:
     var_lib_mysql: {}
     nzedb_nzbs: {}
     nzedb_covers: {}
+    sphinx_data: {}
