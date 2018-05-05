@@ -39,7 +39,7 @@ logs:
 	@$(COMPOSE) logs
 
 mysql:
-	@bin/mysql
+	@bin/mysql -A
 
 mysqltuner:
 	@bin/mysqltuner

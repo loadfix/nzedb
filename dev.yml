@@ -32,3 +32,8 @@ services:
     extends:
       file: common.yml
       service: redis
+
+volumes:
+    var_lib_mysql: {}
+    nzedb_covers: {}
+    nzedb_nzbs: {}

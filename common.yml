@@ -4,8 +4,10 @@ services:
   database:
     image: slydetector/simply-nzedb-mariadb
     restart: unless-stopped
+    tmpfs:
+      - /mnt/ramdisk:size=1G
     volumes:
-      - $PWD/data/var_lib_mysql:/var/lib/mysql
+      - var_lib_mysql:/var/lib/mysql:rw
       - $PWD/data/etc_mysql_conf.d:/etc/mysql/conf.d
       - $PWD/data/mysql_user:/mysql_user
     environment:
@@ -24,8 +26,8 @@ services:
     env_file: 
       - $PWD/etc/simply_nzedb.conf
     volumes:
-      - $PWD/data/covers:/var/www/nZEDb/resources/covers/
-      - $PWD/data/nzb:/var/www/nZEDb/resources/nzb/
+      - nzedb_covers:/var/www/nZEDb/resources/covers/
+      - nzedb_nzbs:/var/www/nZEDb/resources/nzb/
       - $PWD/data/tmp:/var/www/nZEDb/resources/tmp/unrar/
       # configuration/ is expected to contain
       #  - config.php
@@ -54,3 +56,14 @@ services:
   redis:
     image: redis:3.2.6-alpine
     restart: unless-stopped
+
+  sphinx:
+    image: centurylink/sphinx
+    restart: unless-stopped
+    ports:
+      - 9306:9306
+
+volumes:
+    var_lib_mysql: {}
+    nzedb_nzbs: {}
+    nzedb_covers: {}

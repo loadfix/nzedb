@@ -13,9 +13,11 @@ services:
     links:
       - database
       - redis
+      - sphinx
     depends_on:
       - database
       - redis
+      - sphinx
 
   adminer:
     extends:
@@ -30,4 +32,19 @@ services:
     extends:
       file: common.yml
       service: redis
-    
+
+  sphinx:
+    extends:
+      file: common.yml
+      service: sphinx
+  #links:
+  #  - database:db
+  #depends_on:
+  #  - database
+
+volumes:
+    var_lib_mysql: {}
+    nzedb_covers: {}
+    nzedb_nzbs: {}
+    sphinx_data: {}
+
