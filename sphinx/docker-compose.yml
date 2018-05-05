@@ -1,0 +1,7 @@
+version: '2'
+services:
+    sphinx:
+        build: .
+        ports:
+        - "9306:9306"
+        - "9312:9312"
