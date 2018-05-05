@@ -1,0 +1,5 @@
+#!/bin/bash
+echo "Creating se tables..."
+./venv/bin/docker-compose exec nzedb /bin/bash -c "php /var/www/nZEDb/misc/sphinxsearch/create_se_tables.php 0 9312"
+echo "About to populate rt-tables"
+./venv/bin/docker-compose exec nzedb /bin/bash -c "php /var/www/nZEDb/misc/sphinxsearch/populate_rt_indexes.php releases_rt"
